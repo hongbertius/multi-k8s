@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t nottidock/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true nottidock/react-test npm test
+
+after_success:
+  - docker build -t nottidock/multi-client ./client
+  - docker build -t nottidock/multi-nginx ./nginx
+  - docker build -t nottidock/multi-server ./server
+  - docker build -t nottidock/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push nottidock/multi-client
+  - docker push nottidock/multi-nginx
+  - docker push nottidock/multi-server
+  - docker push nottidock/multi-worker
