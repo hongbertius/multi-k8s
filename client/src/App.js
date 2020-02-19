@@ -12,7 +12,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h1>Fib Calculator Version 2</h1>
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
         </div>
