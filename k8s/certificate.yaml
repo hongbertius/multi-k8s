@@ -1,0 +1,20 @@
+apiVersion: certmanager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: huatwithme-xyz-tls
+spec:
+  secretName: huatwithme-xyz-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: huatwithme.xyz
+  dnsNames:
+    - huatwithme.xyz
+    - www.huatwithme.xyz
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - huatwithme.xyz
+          - www.huatwithme.xyz
